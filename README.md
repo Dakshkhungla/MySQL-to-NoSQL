@@ -3,6 +3,12 @@
 
 ![SQL to MongoDB Converter](sql-to-nosql.png)
 
+# Example Video Embed
+
+Watch the video below:
+
+[![Watch the video](https://img.youtube.com/vi/dGqTfGaTv_Y/0.jpg)](https://youtu.be/dGqTfGaTv_Y)
+
 <h2>🚀 Key Features</h2>
 <ul>
   <li><strong>Automatic SQL to MongoDB Conversion</strong><br>Transforms SQL database schema and data into MongoDB-compatible collections and documents.</li>
