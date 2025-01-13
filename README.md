@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+<h1>SQL to MongoDB NoSQL Converter</h1>
+<p>Welcome to the SQL to MongoDB NoSQL Converter! This tool automatically converts SQL scripts into MongoDB-compatible NoSQL JSON format. It processes your SQL file, supports foreign key relationships, and generates MongoDB commands to create collections and insert data into MongoDB. The tool is built using Node.js and can be easily integrated with MongoDB.</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![SQL to MongoDB Converter](sql-to-nosql.png)
 
-## Available Scripts
+<h2>🚀 Key Features</h2>
+<ul>
+  <li><strong>Automatic SQL to MongoDB Conversion</strong><br>Transforms SQL database schema and data into MongoDB-compatible collections and documents.</li>
+  <li><strong>Foreign Key Support</strong><br>Handles foreign key relationships by either embedding related documents or using MongoDB references.</li>
+  <li><strong>Generates MongoDB Commands</strong><br>Creates MongoDB commands to set up collections and insert data directly into MongoDB.</li>
+</ul>
 
-In the project directory, you can run:
+<h2>🧩 How It Works</h2>
+<h3>SQL Script Input</h3>
+<p>The tool reads SQL scripts containing:</p>
+<ul>
+  <li>Schema definitions for table structures.</li>
+  <li>Data insertion commands.</li>
+</ul>
 
-### `npm start`
+<h3>MongoDB JSON Output</h3>
+<p>The tool generates JSON data, suitable for MongoDB collections. MongoDB commands are also generated to automatically create collections and insert data into MongoDB.</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h3>Foreign Key Handling</h3>
+<p>Foreign key relationships are managed by:</p>
+<ul>
+  <li>Embedding related data into parent documents.</li>
+  <li>Creating references between collections when necessary.</li>
+</ul>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h2>🧑‍💻 Setup and Installation</h2>
+<p>To get started, ensure you have the following packages installed:</p>
+<ul>
+  <li>Express - A web framework for Node.js to handle HTTP requests.</li>
+  <li>MongoDB - MongoDB client to interact with your MongoDB database.</li>
+  <li>FileSaver (React) - To save files on the client-side.</li>
+  <li>CORS - To enable Cross-Origin Resource Sharing for your server.</li>
+</ul>
 
-### `npm test`
+<h2>📋 Prerequisites</h2>
+<ul>
+  <li>Node.js installed on your machine.</li>
+  <li>MongoDB installed and running on your local machine or use a cloud MongoDB service.</li>
+  <li>npm to manage packages.</li>
+</ul>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<h2>🛠️ Installation</h2>
+<pre><code>git clone https://github.com/yourusername/sql-to-mongodb.git
+cd sql-to-mongodb
+npm install</code></pre>
 
-### `npm run build`
+<h2>🧑‍💻 Usage</h2>
+<ul>
+  <li>Place your SQL file in the input folder.</li>
+  <li>Run the Node server:</li>
+</ul>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<pre><code>node server.js</code></pre>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<p>The server will process the SQL file, automatically create the MongoDB-compatible JSON data, and generate MongoDB commands to insert the data into the database.</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h3>MongoDB Insertion</h3>
+<p>The generated MongoDB commands can be used to insert the data into MongoDB collections.</p>
 
-### `npm run eject`
+<h2>🌐 Server Configuration</h2>
+<p><strong>CORS:</strong> Ensure that CORS is enabled for cross-origin requests if you're using this in a client-server architecture.</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<p>You can use the following code in the <code>server.js</code> to enable CORS:</p>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<pre><code>const cors = require('cors');
+app.use(cors());</code></pre>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<h3>🚀 Starting the Server</h3>
+<p>To start the Node.js server, use the following command:</p>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<pre><code>node server.js</code></pre>
 
-## Learn More
+<p>This will start the server, which processes your SQL files and generates MongoDB-compatible output.</p>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<h2>🛠️ Dependencies</h2>
+<ul>
+  <li>Express: A fast, unopinionated web framework for Node.js.</li>
+  <li>MongoDB: The MongoDB Node.js driver to interact with MongoDB.</li>
+  <li>FileSaver (React): A simple file-saving utility for web browsers.</li>
+  <li>CORS: A middleware for enabling Cross-Origin Resource Sharing.</li>
+</ul>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<h2>💡 Contribution</h2>
+<p>We welcome contributions! Feel free to fork this project, create a feature branch, and submit a pull request.</p>
 
-### Code Splitting
+<h2>Author</h2>
+<p><strong>Daksh Khungla</strong><br>Email: <a href="mailto:Dakshahir481@gmail.com">Dakshahir481@gmail.com</a></p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<p><em>Transform your SQL data into MongoDB effortlessly! 🎉</em></p>
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
