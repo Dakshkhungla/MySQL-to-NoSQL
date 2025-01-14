@@ -51,8 +51,8 @@ Watch the video below:
 </ul>
 
 <h2>🛠️ Installation</h2>
-<pre><code>git clone https://github.com/yourusername/sql-to-mongodb.git
-cd sql-to-mongodb
+<pre><code>git clone https://github.com/Dakshkhungla/MySQL-to-NoSQL.git
+cd MySQL-to-NoSQL
 npm install</code></pre>
 
 <h2>🧑‍💻 Usage</h2>
