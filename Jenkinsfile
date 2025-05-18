@@ -20,13 +20,6 @@ pipeline {
             }
         }
 
-        stage('Tag Images') {
-            steps {
-                bat 'docker tag mysql-to-mongodb-modified_frontend:latest %FRONTEND_IMAGE%:%BUILD_NUMBER%'
-                bat 'docker tag mysql-to-mongodb-modified_backend:latest %BACKEND_IMAGE%:%BUILD_NUMBER%'
-            }
-        }
-
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
