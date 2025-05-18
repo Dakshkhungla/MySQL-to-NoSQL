@@ -22,17 +22,17 @@ pipeline {
 
         stage('Tag Images') {
             steps {
-                bat "docker tag mysql-to-mongodb-modified_frontend:latest %FRONTEND_IMAGE%:%BUILD_NUMBER%"
-                bat "docker tag mysql-to-mongodb-modified_backend:latest %BACKEND_IMAGE%:%BUILD_NUMBER%"
+                bat 'docker tag mysql-to-mongodb-modified_frontend:latest %FRONTEND_IMAGE%:%BUILD_NUMBER%'
+                bat 'docker tag mysql-to-mongodb-modified_backend:latest %BACKEND_IMAGE%:%BUILD_NUMBER%'
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
-                    bat "docker push %FRONTEND_IMAGE%:%BUILD_NUMBER%"
-                    bat "docker push %BACKEND_IMAGE%:%BUILD_NUMBER%"
+                    bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
+                    bat 'docker push %FRONTEND_IMAGE%:%BUILD_NUMBER%'
+                    bat 'docker push %BACKEND_IMAGE%:%BUILD_NUMBER%'
                     bat 'docker logout'
                 }
             }
