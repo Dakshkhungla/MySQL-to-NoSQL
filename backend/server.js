@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB connection URL
-const url = 'mongodb://127.0.0.1:27017/';
+const url = 'mongodb://mongo:27017/';
 const client = new MongoClient(url);
 
 // Route to add data to a database
