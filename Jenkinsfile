@@ -52,11 +52,11 @@ pipeline {
     }
 
     post {
-        always {
-            emailext(
-            mail to: 'dakshahir481@gmail.com',
-                 subject: "Jenkins Build #${env.BUILD_NUMBER} Results",
-                 body: """Build Status: ${currentBuild.currentResult}
+    always {
+        emailext (
+            to: 'dakshahir481@gmail.com',
+            subject: "Jenkins Build #${env.BUILD_NUMBER} Results",
+            body: """Build Status: ${currentBuild.currentResult}
 
 SonarQube Report: ${env.SONAR_URL}/dashboard?id=${env.SONAR_PROJECT_KEY}
 
@@ -64,8 +64,9 @@ See attached Trivy and SonarQube scan reports.
 
 Build URL: ${env.BUILD_URL}
 """,
-                 attachmentsPattern: 'trivy-*.txt,sonar-report.txt'
+            attachmentsPattern: 'trivy-*.txt,sonar-report.txt'
         )
-        }
     }
+}
+
 }
