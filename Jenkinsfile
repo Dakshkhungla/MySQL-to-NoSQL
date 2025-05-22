@@ -3,9 +3,11 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub_id'          // Jenkins credentials ID for Docker Hub
-        SONARQUBE_ENV = 'SonarQube'                     // Name of SonarQube server in Jenkins config
+        SONARQUBE_ENV = 'SonarQube'               
         FRONTEND_IMAGE = 'dakshkhungla/mysql_to_nosql_frontend'
         BACKEND_IMAGE  = 'dakshkhungla/mysql_to_nosql_backend'
+        SONAR_PROJECT_KEY = 'mysql-to-nosql'        
+        SONAR_URL = 'http://localhost:9000'             
     }
 
     stages {
@@ -18,7 +20,8 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv("${SONARQUBE_ENV}") {
-                    bat 'sonar-scanner'
+                    // Save SonarQube scanner output to a file
+                    bat 'sonar-scanner > sonar-report.txt'
                 }
             }
         }
@@ -31,8 +34,8 @@ pipeline {
 
         stage('Trivy Scan') {
             steps {
-                bat "trivy image ${env.FRONTEND_IMAGE}:${env.BUILD_NUMBER}"
-                bat "trivy image ${env.BACKEND_IMAGE}:${env.BUILD_NUMBER}"
+                bat "trivy image ${env.FRONTEND_IMAGE}:${env.BUILD_NUMBER} > trivy-frontend.txt"
+                bat "trivy image ${env.BACKEND_IMAGE}:${env.BUILD_NUMBER} > trivy-backend.txt"
             }
         }
 
@@ -49,35 +52,18 @@ pipeline {
     }
 
     post {
-        success {
+        always {
             mail to: 'dakshahir481@gmail.com',
-                 subject: "SUCCESS: Build #${env.BUILD_NUMBER} - ${env.JOB_NAME}",
-                 body: """Good news! The build succeeded.
+                 subject: "Jenkins Build #${env.BUILD_NUMBER} Results",
+                 body: """Build Status: ${currentBuild.currentResult}
 
-Project: ${env.JOB_NAME}
-Build Number: ${env.BUILD_NUMBER}
-Build URL: ${env.BUILD_URL}
-"""
-        }
-        failure {
-            mail to: 'dakshahir481@gmail.com',
-                 subject: "FAILURE: Build #${env.BUILD_NUMBER} - ${env.JOB_NAME}",
-                 body: """Oops! The build failed.
+SonarQube Report: ${env.SONAR_URL}/dashboard?id=${env.SONAR_PROJECT_KEY}
 
-Project: ${env.JOB_NAME}
-Build Number: ${env.BUILD_NUMBER}
-Build URL: ${env.BUILD_URL}
-"""
-        }
-        unstable {
-            mail to: 'dakshahir481@gmail.com',
-                 subject: "UNSTABLE: Build #${env.BUILD_NUMBER} - ${env.JOB_NAME}",
-                 body: """Heads up! The build is unstable.
+See attached Trivy and SonarQube scan reports.
 
-Project: ${env.JOB_NAME}
-Build Number: ${env.BUILD_NUMBER}
 Build URL: ${env.BUILD_URL}
-"""
+""",
+                 attachmentsPattern: 'trivy-*.txt,sonar-report.txt'
         }
     }
 }
