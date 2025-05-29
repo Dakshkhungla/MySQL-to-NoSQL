@@ -20,7 +20,6 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv("${SONARQUBE_ENV}") {
-                    // Save SonarQube scanner output to a file
                     bat 'sonar-scanner > sonar-report.txt'
                 }
             }

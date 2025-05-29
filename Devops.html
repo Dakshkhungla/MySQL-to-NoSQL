@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CI/CD Pipeline – MySQL to NoSQL</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 2em;
+      color: #2c3e50;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+    }
+
+    .step {
+      width: 180px;
+      text-align: center;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .step:hover {
+      transform: scale(1.05);
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .arrow {
+      width: 60px;
+      height: 40px;
+      position: relative;
+    }
+
+    .arrow::before {
+      content: "➡";
+      position: absolute;
+      font-size: 24px;
+      color: #2980b9;
+      animation: moveArrow 1.5s linear infinite;
+    }
+
+    @keyframes moveArrow {
+      0% {
+        left: 0;
+        opacity: 0.3;
+      }
+      50% {
+        left: 10px;
+        opacity: 1;
+      }
+      100% {
+        left: 20px;
+        opacity: 0.3;
+      }
+    }
+
+    .compose-snippet {
+      background: #ecf0f1;
+      font-family: monospace;
+      padding: 10px;
+      font-size: 12px;
+      text-align: left;
+      border-radius: 5px;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>MySQL to NoSQL Migration CI/CD Pipeline</h1>
+  <div class="container">
+    <div class="pipeline">
+
+      <div class="step">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="icon" alt="GitHub">
+        <h3>GitHub</h3>
+        <p>Code Commit</p>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="step">
+        <img src="https://www.jenkins.io/images/logos/jenkins/jenkins.png" class="icon" alt="Jenkins">
+        <h3>Jenkins</h3>
+        <p>CI Trigger</p>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="step">
+        <img src="https://www.aviator.co/blog/wp-content/uploads/2023/01/sonarqube-1024x567.png" class="icon" alt="SonarQube">
+        <h3>SonarQube</h3>
+        <p>Code Analysis</p>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="step">
+        <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" class="icon" alt="Docker">
+        <h3>Docker</h3>
+        <p>Build Images</p>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="step">
+        <img src="https://trivy.dev/v0.15.0/imgs/logo.png" class="icon" alt="Trivy">
+        <h3>Trivy</h3>
+        <p>Security Scan</p>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="step">
+        <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" class="icon" alt="Docker Hub">
+        <h3>Docker Hub</h3>
+        <p>Push Images</p>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="step">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="icon" alt="Email">
+        <h3>Email</h3>
+        <p>Send Report</p>
+      </div>
+
+      <div class="arrow"></div>
+
+   <div class="step" style="width: 100%; text-align: center;">
+  <h3 style="margin-bottom: 15px;">Docker Compose</h3>
+  <p style="margin-top: -10px;">Creates 3-tier architecture</p>
+  
+  <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; margin-top: 20px;">
+
+    <div class="step" style="width: 200px; background-color: #ecf0f1;">
+      <img src="https://cdn-icons-png.flaticon.com/512/2721/2721286.png" class="icon" alt="Frontend">
+      <h4>Frontend</h4>
+      <p>Presentation Tier</p>
+    </div>
+
+    <div class="arrow"></div>
+
+    <div class="step" style="width: 200px; background-color: #ecf0f1;">
+      <img src="https://cdn-icons-png.flaticon.com/512/2306/2306124.png" class="icon" alt="Backend">
+      <h4>Backend</h4>
+      <p>Application Tier</p>
+    </div>
+
+    <div class="arrow"></div>
+
+    <div class="step" style="width: 200px; background-color: #ecf0f1;">
+      <img src="https://cdn-icons-png.flaticon.com/512/919/919836.png" class="icon" alt="MongoDB">
+      <h4>MongoDB</h4>
+      <p>Data Tier</p>
+    </div>
+
+  </div>
+
+  <div class="compose-snippet">
+version: '3.8'
+services:
+  frontend:
+    image: frontend:${BUILD_NUMBER}
+  backend:
+    image: backend:${BUILD_NUMBER}
+  mongo:
+    image: mongo:8.0
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</body>
+</html>
